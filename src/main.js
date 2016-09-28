@@ -15,7 +15,7 @@ import Routes from './common/components/Routes';
 
 // Base styling
 import './common/base.css';
-//import "./common/styles/app.less";
+import "./common/styles/app.less";
 
 
 // ID of the DOM element to mount app on
