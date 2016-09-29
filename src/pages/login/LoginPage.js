@@ -1,7 +1,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import styles from './style.css';
-import { Panel, Input, Button } from 'react-bootstrap';
+import { Panel, FormControl, Button, Checkbox } from 'react-bootstrap';
 
 
 export default class LoginPage extends React.Component {
@@ -38,7 +38,8 @@ export default class LoginPage extends React.Component {
     onSubmit (event) {
         event.preventDefault()
         //this.props.dispatch(loginRequest({this.state.user.UserPhoneNumber, this.state.user.Password}))
-        this.props.actions.loginRequest(this.state.user)
+        //this.props.actions.loginRequest(this.state.user)
+        browserHistory.push('/dashboard');
     }
 
     render() {
@@ -46,8 +47,7 @@ export default class LoginPage extends React.Component {
             <div className="col-md-4 col-md-offset-4">
 
                 <div className="text-center">
-                    <h1 className="login-brand-text">SB Admin React</h1>
-                    <h3 className="text-muted">Created by <a href="http://startreact.com">StartReact.com</a> team</h3>
+                    <h1 className="login-brand-text">Admin Panel</h1>
                 </div>
 
                 <Panel header={<h3>Please Sign In</h3>} className="login-panel">
@@ -55,15 +55,15 @@ export default class LoginPage extends React.Component {
                     <form role="form" onSubmit={this.handleLogin}>
                         <fieldset>
                             <div className="form-group">
-                                <Input onChange={this.onUserPhoneChange} className="form-control" placeholder="User Phone Number"
-                                       value={this.state.user.UserPhoneNumber} type="text" autofocus="" name="name"/>
+                                <FormControl onChange={this.onUserPhoneChange} className="form-control" placeholder="User Phone Number"
+                                       value={this.state.user.UserPhoneNumber} type="text" name="name"/>
                             </div>
 
                             <div className="form-group">
-                                <Input onChange={this.onPasswordChange} className="form-control" placeholder="Password"
+                                <FormControl onChange={this.onPasswordChange} className="form-control" placeholder="Password"
                                        value={this.state.user.Password} type="password" name="password"/>
                             </div>
-                            <Input type="checkbox" label="Remember Me"/>
+                            <Checkbox>Remember Me</Checkbox>
                             <Button type="submit" onClick={this.onSubmit} bsSize="large" bsStyle="success" block>Login</Button>
 
                         </fieldset>
