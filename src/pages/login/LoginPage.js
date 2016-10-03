@@ -1,10 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import styles from './style.css';
 import { Panel, FormControl, Button, Checkbox } from 'react-bootstrap';
+import * as loginActions from '../../actions/loginActions';
 
-
-export default class LoginPage extends React.Component {
+class LoginPage extends React.Component {
     signUp() {
         browserHistory.push('/home');
     }
@@ -37,8 +39,8 @@ export default class LoginPage extends React.Component {
 
     onSubmit (event) {
         event.preventDefault()
-        //this.props.dispatch(loginRequest({this.state.user.UserPhoneNumber, this.state.user.Password}))
-        //this.props.actions.loginRequest(this.state.user)
+        //actions.loginRequest(this.state.user);
+        this.props.actions.loginRequest(this.state.user)
         browserHistory.push('/dashboard');
     }
 
@@ -76,6 +78,20 @@ export default class LoginPage extends React.Component {
     }
 }
 LoginPage.propTypes = {
-    user: React.PropTypes.object,
-    //actions: React.PropTypes.object.isRequired
+    user: React.PropTypes.object.isRequired,
+    actions: React.PropTypes.object.isRequired
 };
+
+function mapStateToProps(state, ownProps) {
+    return {
+        data: state.data
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(loginActions, dispatch)
+    };
+}
+// Wrap the component to inject dispatch and state into it
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
