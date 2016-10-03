@@ -11,7 +11,7 @@ class MenuRight extends React.Component {
                         </li>
 
                         <li>
-                            <Link to="category"><i className="fa fa-table fa-fw"></i> &nbsp;
+                            <Link to="categories"><i className="fa fa-table fa-fw"></i> &nbsp;
                                 Categories</Link>
                         </li>
 
