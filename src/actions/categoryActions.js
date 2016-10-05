@@ -1,16 +1,27 @@
 import * as types from '../constants/actionTypes';
-import categoryApi from '../api/mockCourseApi';
+import { CALL_API } from '../middleware/api';
 
-export function loadCategoriesSuccess(categories) {
-    return {type: types.LOAD_CATEGORY_SUCCESS, categories}
-}
 
-export function loadCategories() {
-    return function (dispatch) {
-        return categoryApi.getAllCategories().then( categories => {
-            dispatch(loadCategoriesSuccess(categories));
-            }).catch(error =>{
-                throw (error);
-        })
+// Uses the API middlware to get a category
+export function fetchCategories() {
+    return {
+        [CALL_API]: {
+            endpoint: 'categories/getList.json',
+            types: [types.CATEGORY_REQUEST, types.CATEGORY_SUCCESS, types.CATEGORY_FAILURE]
+        }
     }
 }
+
+// Same API middlware is used to get a
+// secret category, but we set authenticated
+// to true so that the auth header is sent
+export function fetchSecretCategories() {
+    return {
+        [CALL_API]: {
+            endpoint: 'categories/getList.json',
+            authenticated: true,
+            types: [types.CATEGORY_REQUEST, types.CATEGORY_SUCCESS, types.CATEGORY_FAILURE]
+        }
+    }
+}
+

@@ -1,8 +1,18 @@
 import  React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import { Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
+import * as loginActions from '../../actions/loginActions';
+
 class HeaderBar extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+    }
+
     render() {
+        const { isAuthenticated, errorMessage } = this.props;
+
         return (
             <Navbar>
                 <Navbar.Header>
@@ -19,11 +29,12 @@ class HeaderBar extends React.Component {
                                 <i className="fa fa-user fa-fw"></i> User Profile
                             </MenuItem>
                             <MenuItem eventKey={1.2}>
-                                <i className="fa fa-gear fa-fw"></i> Settings
+                                <Link to="categories"><i className="fa fa-table fa-fw"></i> &nbsp;
+                                    Categories</Link>
                             </MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey={1.3}>
-                                <Link to={'login'}>
+                                <Link onClick={() => this.props.actions.logoutUser()} to={'login'}>
                                     <i className="fa fa-sign-out fa-fw"></i> Logout
                                 </Link>
                             </MenuItem>
@@ -36,6 +47,18 @@ class HeaderBar extends React.Component {
 }
 
 HeaderBar.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    actions: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string
 };
-export default HeaderBar;
+function mapStateToProps(state, ownProps) {
+
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(loginActions, dispatch)
+    };
+}
+// Wrap the component to inject dispatch and state into it
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderBar)

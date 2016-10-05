@@ -14,7 +14,7 @@ import {Router, browserHistory} from 'react-router';
 
 // Routes
 import Routes from './common/components/Routes';
-import {loadCategories} from './actions/categoryActions';
+import {fetchSecretCategories} from './actions/categoryActions';
 // Base styling
 import './common/base.css';
 import "./common/styles/app.less";
@@ -23,7 +23,7 @@ import "./common/styles/app.less";
 // ID of the DOM element to mount app on
 const DOM_APP_EL_ID = 'app';
 const store = configureStore();
-store.dispatch(loadCategories());
+store.dispatch(fetchSecretCategories());
 // Render the router
 ReactDOM.render((
     <Provider store={store}>

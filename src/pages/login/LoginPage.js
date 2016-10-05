@@ -14,7 +14,7 @@ class LoginPage extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            user: {UserPhoneNumber:'', Password:''}
+            user: {UserPhoneNumber:'0932988688', Password:'123456'}
         };
         this.onSubmit = this.onSubmit.bind(this)
         this.onUserPhoneChange = this.onUserPhoneChange.bind(this)
@@ -39,12 +39,12 @@ class LoginPage extends React.Component {
 
     onSubmit (event) {
         event.preventDefault()
-        //actions.loginRequest(this.state.user);
-        this.props.actions.loginRequest(this.state.user)
-        browserHistory.push('/dashboard');
+        this.props.actions.loginUser(this.state.user)
     }
 
     render() {
+        const { errorMessage } = this.props
+
         return (
             <div className="col-md-4 col-md-offset-4">
 
@@ -65,6 +65,7 @@ class LoginPage extends React.Component {
                                 <FormControl onChange={this.onPasswordChange} className="form-control" placeholder="Password"
                                        value={this.state.user.Password} type="password" name="password"/>
                             </div>
+
                             <Checkbox>Remember Me</Checkbox>
                             <Button type="submit" onClick={this.onSubmit} bsSize="large" bsStyle="success" block>Login</Button>
 
@@ -79,12 +80,13 @@ class LoginPage extends React.Component {
 }
 LoginPage.propTypes = {
     user: React.PropTypes.object.isRequired,
-    actions: React.PropTypes.object.isRequired
+    actions: React.PropTypes.object.isRequired,
+    errorMessage: React.PropTypes.string
 };
 
 function mapStateToProps(state, ownProps) {
     return {
-        data: state.data
+        user: state.user
     };
 }
 
