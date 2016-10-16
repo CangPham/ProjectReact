@@ -1,7 +1,17 @@
 import express from 'express';
+import request from 'request';
 const app = express();
 
-
+app.use('/proxy', function (req, res) {
+  console.log(req.headers.authorization)
+  var url = 'https://cloudorder.vn/api/' + req.url.replace('/?url=', '');
+  var token = req.headers.authorization;
+  var options = {
+    url: url,
+    headers: {authorization: token}
+  };
+  req.pipe(request(options)).pipe(res);
+});
 /************************************************************
  *
  * Express routes for:

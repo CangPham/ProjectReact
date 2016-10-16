@@ -48,16 +48,6 @@ const categories = [
 
 class CourseApi {
   static getAllCategories() {
-    // $.post("https://cloudorder.vn/api/users/login.json",
-    //            {
-    //              "UserPhoneNumber" : "0932988688",
-    //              "Password": "123456"
-    //            },
-    //            function(data,status){
-    //              alert("Data: " + data + "\nStatus: " + status);
-    //            });
-
-
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(Object.assign([], categories));

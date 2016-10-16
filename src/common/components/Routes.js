@@ -5,7 +5,7 @@ import App from './App';
 import DashboardLayout from './DashboardLayout';
 import LoginPage from '../../pages/login/LoginPage';
 import HomePage from '../../pages/home/HomePage';
-import CategoryList from '../../pages/categories/CategoryList';
+import CategoriesPage from '../../pages/categories/CategoriesPage';
 import ManageCategory from '../../pages/categories/ManageCategoryPage';
 
 export default (
@@ -14,7 +14,7 @@ export default (
             <IndexRoute component={LoginPage}/>
             <Route name="dashboard" path="/dashboard" component={DashboardLayout}>
                 <Route name="home" path="/home" component={HomePage}/>
-                <Route path="/categories" component={CategoryList}/>
+                <Route path="/categories" component={CategoriesPage}/>
                 <Route path="/category" component={ManageCategory}/>
                 <Route path="/category:id" component={ManageCategory}/>
             </Route>
