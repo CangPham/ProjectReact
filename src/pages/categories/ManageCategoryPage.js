@@ -2,35 +2,39 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as categoryActions from '../../actions/categoryActions'
+import CategoryForm from './CategoryForm';
 
 class ManageCategoryPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-
+        this.state = {
+            category: Object.assign({}, this.props.category),
+            errors: {}
+        };
     }
 
     render() {
         return (
-            <h1>Manage Category</h1>
+            <div>
+                <h1>Manage Category</h1>
+                <CategoryForm
+                    category={this.state.category}
+                    errors={this.state.errors}
+                />
+            </div>
         );
     }
 }
 
 ManageCategoryPage.propTypes = {
-    //myProp: React.PropTypes.object, 
+    category: React.PropTypes.object.isRequired,
     actions: React.PropTypes.object.isRequired
 }
 
-// Which props do we want to inject, given the global state?
-function select(state) {
-    return {
-        data: state
-    }
-}
-
 function mapStateToProps(state, ownProps) {
+    let category = {id: '', CategoryName: '', CategoryDescription: ''};
     return {
-        state: state
+        category: category
     };
 }
 
