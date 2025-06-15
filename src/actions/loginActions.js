@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import * as types from '../constants/actionTypes';
+import {browserHistory} from 'react-router';
 
 export function loginUser(creds) {
 
@@ -27,6 +28,7 @@ export function loginUser(creds) {
                     localStorage.setItem('id_token', user.UserData.token)
                     // Dispatch the success action
                     dispatch(receiveLogin(user))
+                    browserHistory.push('/dashboard')
                 }
             }).catch(err => console.log("Error: ", err))
     }
